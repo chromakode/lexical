@@ -208,6 +208,8 @@ function updateCursor(
   }
 
   const containerRect = cursorsContainerOffsetParent.getBoundingClientRect();
+  const containerScrollTop = cursorsContainerOffsetParent.scrollTop
+  const containerScrollLeft = cursorsContainerOffsetParent.scrollLeft
   const prevSelection = cursor.selection;
 
   if (nextSelection === null) {
@@ -277,8 +279,8 @@ function updateCursor(
       cursorsContainer.appendChild(selection);
     }
 
-    const top = selectionRect.top - containerRect.top;
-    const left = selectionRect.left - containerRect.left;
+    const top = selectionRect.top - containerRect.top + containerScrollTop;
+    const left = selectionRect.left - containerRect.left + containerScrollLeft;
     const style = `position:absolute;top:${top}px;left:${left}px;height:${selectionRect.height}px;width:${selectionRect.width}px;pointer-events:none;z-index:5;`;
     selection.style.cssText = style;
 
